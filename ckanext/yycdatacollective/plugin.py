@@ -3,7 +3,7 @@
 import ckan.plugins as plugins
 
 
-class ExampleThemePlugin(plugins.SingletonPlugin):
+class YycdatacollectivePlugin(plugins.SingletonPlugin):
     '''An example theme plugin.
 
     '''
