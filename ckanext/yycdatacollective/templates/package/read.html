@@ -45,7 +45,13 @@
     {% endfor %}
 
     {% if org.id in id %}
+{#
         <p class="empty">This user belongs to this organization, hence can preview.</p>
+#}
+        {% block package_resources %}
+          {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+        {% endblock %}
+
     {% else %}
         <p class="empty">You are not part of this organization. If you want to preview this dataset you should contact the dataset owner.</p>
 
@@ -54,9 +60,11 @@
     </span>
   {% endblock %}
 
+{#
   {% block package_resources %}
     {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
   {% endblock %}
+#}
 
   {% block package_tags %}
     {% snippet "package/snippets/tags.html", tags=pkg.tags %}
