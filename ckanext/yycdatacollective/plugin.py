@@ -21,6 +21,6 @@ class YycdatacollectivePlugin(plugins.SingletonPlugin):
         # 'templates' is the path to the templates dir, relative to this
         # plugin.py file.
         # This tells CKAN to look for template files in 
-        # ckanext-example_theme/ckanext/example_theme/templates whenever it 
+        # ckanext-yycdatacollective/ckanext/yycdatacollective/templates whenever it 
         # renders a page.
         toolkit.add_template_directory(config, 'templates')
