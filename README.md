@@ -5,6 +5,10 @@ CKAN extension for YYC Data Collective
 
 ```ckanext/yycdatacollective``` is the Python package directory where we'll add the source code files for our extension.
 
+The ```context``` parameter is a dictionary that CKAN passes to all authorization and action functions containing some computed variables. 
+
+The ```data_dict``` parameter is another dictionary that CKAN passes to all authorization and action functions. ```data_dict``` contains any data posted by the user to CKAN.
+
 # Installation
 When you install CKAN, you create a Python virtual environment in a directory on your system (```/usr/lib/ckan/default``` by default) and install the CKAN Python package and the other packages that CKAN depends on into this virtual environment. 
 
