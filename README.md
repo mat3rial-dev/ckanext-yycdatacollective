@@ -17,3 +17,9 @@ Make sure your virtualenv is activated, change to the extension's directory, and
 cd /usr/lib/ckan/default/src/ckanext-iauthfunctions
 python setup.py develop
 ```
+
+# Enabling the plugin
+
+An extension’s plugins must be added to the ckan.plugins setting in your CKAN config file so that CKAN will call the plugins' methods. The name that you gave to your plugin class in the left-hand-side of the assignment in the ```setup.py``` file is the name you'll use for your plugin in CKAN's config file:
+
+ckan.plugins = ... other plugins ... yycdatacollective
