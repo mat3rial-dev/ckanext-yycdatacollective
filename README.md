@@ -18,7 +18,7 @@ Make sure your virtualenv is activated, change to the extension's directory, and
 
 ```
 . /usr/lib/ckan/default/bin/activate
-cd /usr/lib/ckan/default/src/ckanext-iauthfunctions
+cd /usr/lib/ckan/default/src/ckanext-yycdatacollective
 python setup.py develop
 ```
 
