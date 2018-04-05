@@ -13,6 +13,7 @@ class YycdatacollectivePlugin(plugins.SingletonPlugin):
     '''
     # Declare that this class implements IConfigurer.
     plugins.implements(plugins.IConfigurer)
+    plugins.implements(plugins.IRoutes, inherit=True)
 
     def update_config(self, config):
 
@@ -24,3 +25,9 @@ class YycdatacollectivePlugin(plugins.SingletonPlugin):
         # ckanext-yycdatacollective/ckanext/yycdatacollective/templates whenever it 
         # renders a page.
         toolkit.add_template_directory(config, 'templates')
+
+    def before_map(self, map):
+        map.connect('contact-us', '/contact-us',
+            controller='ckanext.yycdatacollective.controller:ContactUsController',
+            action='index')
+        return map 
