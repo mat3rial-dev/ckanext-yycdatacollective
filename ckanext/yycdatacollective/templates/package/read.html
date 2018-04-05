@@ -44,6 +44,14 @@
         {% do id.append(orav.id) %}
     {% endfor %}
 
+    
+    <p>Maintainer: {{ pkg.maintainer }} </p>
+    <p>Maintainer email: {{ pkg.maintainer_email }} </p>
+    <p>Author: {{ pkg.author }} </p>
+    <p>Author email: {{ pkg.author_email }} </p>
+    <p>Download URL: {{ pkg.resources[0].url }} </p>
+    <p>PKG: {{ pkg }} </p>
+
     {% if org.id in id %}
 {#
         <p class="empty">This user belongs to this organization, hence can preview.</p>
