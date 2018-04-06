@@ -7,24 +7,22 @@ import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from pylons import tmpl_context as c
 import ckan.lib.helpers as h
+import ast
 
 def dataset_data_retriever(context, dataset_data_dict):
     '''Retrieve author and mantainer name and email, as well as dataset URL.'''
 
     ''' Return dictionary with author and maintainer data as well as dataset URL.'''
 
-    print "Dataset data dict"
-    print dataset_data_dict
-    print "END"
+#    print dataset_data_dict
+#    print "END"
+#    print "PLUGIN-Context: {0}\n".format(context.data_dict)
 
+    contact_form_data=dict(context.data_dict)
+    contact_form_data = ast.literal_eval(contact_form_data['dataset_data_dict'])
+    contact_form_data['request_ip']=context.remote_addr
 
-    contact_form_data={'pkg.maintainer': 'pkg.maintainer', \
-                        'pkg.maintainer_email': 'pkg.maintainer_email', \
-                        'pkg.author': 'pkg.author', \
-                        'pkg.author_email': 'pkg.author_email', \
-                        'pkg.dataset_url': 'pkg.resources[0].url', \
-			'usr.ip_address': context.remote_addr
-                        }
+    print "Dataset data dict:{0}".format(contact_form_data)
 
     return contact_form_data
 

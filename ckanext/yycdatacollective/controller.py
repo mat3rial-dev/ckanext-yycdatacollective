@@ -7,14 +7,16 @@ from ckan.lib.base import BaseController, config
 import jinja2
 from ckan.common import _, c, g, request
 from validate_email import validate_email
+from pylons import request, config, tmpl_context as c
 
 abort = base.abort
 render = base.render
 
 class ContactUsController(BaseController):
     def index(self, context=None):
-        c = p.toolkit.c
+#        c = p.toolkit.c
         data = request.params or {}
+	print "Data: {0}".format(data)
         errors = {}
         error_summary = {}
         print config.get('email_to');
@@ -45,9 +47,12 @@ class ContactUsController(BaseController):
                 except ckan.lib.mailer.MailerException:
                     raise
         #error_summary = errors
-        vars = {'data': data, 'errors': errors, 'error_summary': error_summary}
-#	print vars
-	print "h:{0}\np:{1}\nc:{2}\ng{3}\n".format(h, p, c, g)
+
+        vars = {'data': request.params, 'errors': errors, 'error_summary': error_summary}
+
+	c.data_dict = data
+	print "C+VARS: {0}".format(c)
+
         return render('ckanext/contact_us/index.html', extra_vars=vars)
 
 
