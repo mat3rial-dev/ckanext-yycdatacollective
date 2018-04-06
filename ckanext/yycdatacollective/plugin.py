@@ -8,23 +8,25 @@ import ckan.plugins.toolkit as toolkit
 from pylons import tmpl_context as c
 import ckan.lib.helpers as h
 
-def dataset_data_retriever(dataset_data_dict):
+def dataset_data_retriever(context, dataset_data_dict):
     '''Retrieve author and mantainer name and email, as well as dataset URL.'''
 
     ''' Return dictionary with author and maintainer data as well as dataset URL.'''
-#    contact_form_data={'pkg.maintainer': pkg.maintainer, \
-#                        'pkg.maintainer_email': pkg.maintainer_email, \
-#                        'pkg.author': pkg.author, \
-#                        'pkg.author_email': pkg.author_email, \
-#                        'pkg.dataset_url': pkg.resources[0].url
-#                        }
-#    print contact_form_data
-#    return contact_form_data
-#    print "Dataset data retriever from plugin "
-#    print dataset_data_dict
-#    print "DDR"
 
-    return c
+    print "Dataset data dict"
+    print dataset_data_dict
+    print "END"
+
+
+    contact_form_data={'pkg.maintainer': 'pkg.maintainer', \
+                        'pkg.maintainer_email': 'pkg.maintainer_email', \
+                        'pkg.author': 'pkg.author', \
+                        'pkg.author_email': 'pkg.author_email', \
+                        'pkg.dataset_url': 'pkg.resources[0].url', \
+			'usr.ip_address': context.remote_addr
+                        }
+
+    return contact_form_data
 
 
 class YycdatacollectivePlugin(plugins.SingletonPlugin):
