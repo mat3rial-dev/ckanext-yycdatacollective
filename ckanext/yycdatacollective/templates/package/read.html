@@ -12,6 +12,7 @@
       </span>
     {% endif %}
     <h1>
+
       {% block page_heading %}
         {{ h.dataset_display_name(pkg) }}
         {% if pkg.state.startswith('draft') %}
@@ -33,8 +34,6 @@
     <span class="insert-comment-thread">
  
     {% set url_action = 'resource_edit' if url_is_edit and can_edit else 'resource_read' %}
-    {# set url = h.url_for(controller='package', action=url_action, id=pkg.name, resource_id=res.id) #}
-
 
     {% set org = h.get_organization(pkg.organization.name) %}
     {% set org_av = h.organizations_available() %}
@@ -44,35 +43,43 @@
         {% do id.append(orav.id) %}
     {% endfor %}
 
-    
+{#    
     <p>Maintainer: {{ pkg.maintainer }} </p>
     <p>Maintainer email: {{ pkg.maintainer_email }} </p>
     <p>Author: {{ pkg.author }} </p>
     <p>Author email: {{ pkg.author_email }} </p>
     <p>Download URL: {{ pkg.resources[0].url }} </p>
-    <p>PKG: {{ pkg }} </p>
+#}
+
+    {% set contact_form_data = dict() %}
+    {% do contact_form_data.update({'pkg.maintainer': pkg.maintainer}) %}
+    {% do contact_form_data.update({'pkg.maintainer_email': pkg.maintainer_email}) %}
+    {% do contact_form_data.update({'pkg.author': pkg.author}) %}
+    {% do contact_form_data.update({'pkg.author_email': pkg.author_email}) %}
+    {% do contact_form_data.update({'pkg.dataset_url': pkg.resources[0].url}) %}
+
+    <p>contact_form_data: {{ contact_form_data }}</p>
 
     {% if org.id in id %}
-{#
-        <p class="empty">This user belongs to this organization, hence can preview.</p>
-#}
+    {# This user belongs to this organization, hence can preview. #}
         {% block package_resources %}
           {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
         {% endblock %}
 
     {% else %}
-        <p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href="http://165.227.32.81:5000/contact-us">contact the dataset owner.</a></p>
+
+        {# set contact_url = h.url_for(controller='package', action='read', id=pkg.id, contact_form_data=contact_form_data) #}
+        {% set contact_url = h.url_for('contact-us', dataset_data_retriever=contact_form_data) %}
+	<p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href="{{ contact_url }}">contact the dataset owner.</a></p>
+
+{#
+	{% snippet "package/snippets/test.html" %}
+#}
 
     {% endif %}
 
     </span>
   {% endblock %}
-
-{#
-  {% block package_resources %}
-    {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
-  {% endblock %}
-#}
 
   {% block package_tags %}
     {% snippet "package/snippets/tags.html", tags=pkg.tags %}

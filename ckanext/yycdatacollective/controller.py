@@ -1,3 +1,4 @@
+
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.plugins as p
@@ -16,9 +17,8 @@ class ContactUsController(BaseController):
         data = request.params or {}
         errors = {}
         error_summary = {}
-        print data
         print config.get('email_to');
-        
+
         if not data == {} :
             import ckan.lib.mailer
             if data.get('contact_us.nochange') != 'http://' :
@@ -27,14 +27,18 @@ class ContactUsController(BaseController):
                 errors['contact_us.name'] = [_('Missing value')]
             if not data.get('contact_us.email') :
                 errors['contact_us.email'] = [_('Missing value')]
+            if not data.get('contact_us.institution') :
+                errors['contact_us.institution'] = [_('Missing value')]
             elif not validate_email(data.get('contact_us.email')):
                 errors['contact_us.email'] = [_('Invalid email')]
             if not data.get('contact_us.message') :
                 errors['contact_us.message'] = [_('Missing value')]
-            
+
+
+
             if errors == {} :
                 try:
-                    emails = config.get('contact_us.email') 
+                    emails = config.get('contact_us.email')
                     for v in emails.split(','): ckan.lib.mailer._mail_recipient('Admin',v,data.get('contact_us.name'),data.get('contact_us.email'),'Contact form',data.get('contact_us.message'))
                     h.flash_success(_('Email sent'))
                     data = {}
@@ -42,6 +46,8 @@ class ContactUsController(BaseController):
                     raise
         #error_summary = errors
         vars = {'data': data, 'errors': errors, 'error_summary': error_summary}
+#	print vars
+	print "h:{0}\np:{1}\nc:{2}\ng{3}\n".format(h, p, c, g)
         return render('ckanext/contact_us/index.html', extra_vars=vars)
-    
+
 
