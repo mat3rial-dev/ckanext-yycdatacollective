@@ -51,7 +51,7 @@ class ContactUsController(BaseController):
         vars = {'data': request.params, 'errors': errors, 'error_summary': error_summary}
 
 	c.data_dict = data
-	print "C+VARS: {0}".format(c)
+	#print "C+VARS: {0}".format(c)
 
         return render('ckanext/contact_us/index.html', extra_vars=vars)
 
