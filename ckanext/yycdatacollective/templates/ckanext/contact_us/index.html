@@ -9,54 +9,51 @@
 <section class="module module-narrow module-shallow">
     <h2 class="module-heading"><i class="icon-medium icon-info-sign"></i></h2>
     <div class="module-content">
-		<p>
-			{{_('Please fill out this form to request access to the dataset. We will redirect your message to the appropriate resources. All fields are required. Let us know if you have any questions.')}}
-		</p>
-	</div>
+        <p>
+            {{_('Please fill out this form to request access to the dataset. We will redirect your message to the appropriate resources. All fields are required. Let us know if you have any questions.')}}
+        </p>
+    </div>
 </section>
 {% endblock %}
 
 {% block primary_content %}
 <article class="module">
     <div class="module-content">
-    	<h2>{{ _('Contact Us') }}</h2>
-		{% block package_resources %}
-			{% set dataset_data_retriever = h.dataset_data_retriever(c, dict()) %}
-{#
-			<p> {{ dataset_data_retriever }} </p>
-#}
-			<p>You are making your request from the IP address {{ dataset_data_retriever['request_ip'] }}</p>
-			<p>You are about to send an email to the dataset maintainer {{ dataset_data_retriever['pkg.maintainer'] }}</p>
+        <h2>{{ _('Contact Us') }}</h2>
+        {% block package_resources %}
+            {% set dataset_data_retriever = h.dataset_data_retriever(c, dict()) %}
+            <p>You are making your request from the IP address {{ dataset_data_retriever['request_ip'] }}</p>
+            <p>You are about to send an email to the dataset maintainer {{ dataset_data_retriever['pkg.maintainer'] }}</p>
 
-		{% endblock %}
+        {% endblock %}
 
 
 
-		<p>*{{ _('All fields are required') }}</p>
-		{% set form_info = [
-		    {'name': 'contact_us.name', 'control': 'input', 'label': _('Your name')+' *', 'placeholder': _('e.g., John Doe')},
-		    {'name': 'contact_us.email', 'control': 'input', 'label': _('Your email')+' *', 'placeholder': _('e.g., jdoe@example.com')},
-		    {'name': 'contact_us.institution', 'control': 'input', 'label': _('Your institution')+' *', 'placeholder': _('e.g., My Institution')},
-		    {'name': 'contact_us.message', 'control': 'textarea', 'label': _('Your Message')+' *', 'placeholder': _('Hi, ...')}
-		] %}
-		
-		<form enctype="multipart/form-data" method="post" action="">
-		{% import 'macros/autoform.html' as autoform %}
-		{% import 'macros/form.html' as form %}
-		{{ form.errors(error_summary) }}
-		{{ autoform.generate(form_info, data, errors) }}
-		<div class="control-group control-medium controls-text">
-		    <label class="control-label" for="field-contact-us-nochange">Do not change *</label>
-		    <div class="controls ">
-		    	<input id="field-contact-us-nochange" type="text" name="contact_us.nochange" value="http://">
-		    </div>
-		</div>
-		<input type="submit" name="" value="{{ _('Submit') }}">
-		</form>
-		
-		{# c.msg #}
-	</div>
-	<style>.controls-text{visibility:hidden;height:10px;}</style>
+        <p>*{{ _('All fields are required') }}</p>
+        {% set form_info = [
+            {'name': 'contact_us.name', 'control': 'input', 'label': _('Your name')+' *', 'placeholder': _('e.g., John Doe')},
+            {'name': 'contact_us.email', 'control': 'input', 'label': _('Your email')+' *', 'placeholder': _('e.g., jdoe@example.com')},
+            {'name': 'contact_us.institution', 'control': 'input', 'label': _('Your institution')+' *', 'placeholder': _('e.g., My Institution')},
+            {'name': 'contact_us.message', 'control': 'textarea', 'label': _('Your Message')+' *', 'placeholder': _('Hi, ...')}
+        ] %}
+        
+        <form enctype="multipart/form-data" method="post" action="">
+        {% import 'macros/autoform.html' as autoform %}
+        {% import 'macros/form.html' as form %}
+        {{ form.errors(error_summary) }}
+        {{ autoform.generate(form_info, data, errors) }}
+        <div class="control-group control-medium controls-text">
+            <label class="control-label" for="field-contact-us-nochange">Do not change *</label>
+            <div class="controls ">
+                <input id="field-contact-us-nochange" type="text" name="contact_us.nochange" value="http://">
+            </div>
+        </div>
+        <input type="submit" name="" value="{{ _('Submit') }}">
+        </form>
+        
+        {# c.msg #}
+    </div>
+    <style>.controls-text{visibility:hidden;height:10px;}</style>
 </article>
 
 {% endblock %}
