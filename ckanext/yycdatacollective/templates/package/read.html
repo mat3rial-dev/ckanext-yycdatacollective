@@ -43,13 +43,6 @@
         {% do id.append(orav.id) %}
     {% endfor %}
 
-{#    
-    <p>Maintainer: {{ pkg.maintainer }} </p>
-    <p>Maintainer email: {{ pkg.maintainer_email }} </p>
-    <p>Author: {{ pkg.author }} </p>
-    <p>Author email: {{ pkg.author_email }} </p>
-    <p>Download URL: {{ pkg.resources[0].url }} </p>
-#}
 
     {% set contact_form_data = dict() %}
     {% do contact_form_data.update({'pkg.maintainer': pkg.maintainer}) %}
@@ -58,9 +51,6 @@
     {% do contact_form_data.update({'pkg.author_email': pkg.author_email}) %}
     {% do contact_form_data.update({'pkg.dataset_url': pkg.resources[0].url}) %}
 
-{#
-    <p>contact_form_data: {{ contact_form_data }}</p>
-#}
     {% if org.id in id %}
     {# This user belongs to this organization, hence can preview. #}
         {% block package_resources %}
@@ -69,9 +59,10 @@
 
     {% else %}
 
-        {# set contact_url = h.url_for(controller='package', action='read', id=pkg.id, contact_form_data=contact_form_data) #}
-        {% set contact_url = h.url_for('contact-us', dataset_data_dict=contact_form_data) %}
-	<p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href="{{ contact_url }}">contact the dataset owner.</a></p>
+        {# set contact_url = h.url_for('contact-us', dataset_data_dict=contact_form_data) #}
+	<p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href="">contact the dataset owner.</a></p>
+
+<!-- <p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href="{{ contact_url }}">contact the dataset owner.</a></p> -->
 
 {#
 	{% snippet "package/snippets/test.html" %}

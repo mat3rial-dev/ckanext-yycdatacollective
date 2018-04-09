@@ -16,24 +16,25 @@ class ContactUsController(BaseController):
         data = request.params or {}
         errors = {}
         error_summary = {}
-        print "data: "
-        print data
-        print "contactus: "
-        print config.get('contact_us.email')
-        print "emailto:"
-        print config.get('email_to')
+        # print "h: {0}".format(h)
+        # print "p: {0}".format(p)
+        # print "c: {0}".format(c)
+        # print "g: {0}".format(g)
+        # print "data: {0}".format(data)
+        # print "contact_us: {0}".format(config.get('contact_us.email'))
+        # print "emailto: {0}".format(config.get('email_to'))
 
-        if not data == {} :
+        if not data == {}:
             import ckan.lib.mailer
             if data.get('contact_us.nochange') != 'http://':
                 errors['contact_us.nochange'] = [_('The value was edited')]
-            if not data.get('contact_us.name') :
+            if not data.get('contact_us.name'):
                 errors['contact_us.name'] = [_('Missing value')]
-            if not data.get('contact_us.email') :
+            if not data.get('contact_us.email'):
                 errors['contact_us.email'] = [_('Missing value')]
             elif not validate_email(data.get('contact_us.email')):
                 errors['contact_us.email'] = [_('Invalid email')]
-            if not data.get('contact_us.message') :
+            if not data.get('contact_us.message'):
                 errors['contact_us.message'] = [_('Missing value')]
 
             if errors == {}:

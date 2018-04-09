@@ -52,11 +52,11 @@ class YycdatacollectivePlugin(plugins.SingletonPlugin):
         toolkit.add_template_directory(config, 'templates')
 
     def before_map(self, map):
-        map.connect('contact-us', '/contact-us',
-            controller='ckanext.yycdatacollective.controller:ContactUsController',
-            action='index')
-        map.connect('contact-us', '/dataset/{id}/us',
-            controller='ckanext.yycdatacollective.controller:ContactUsController',
+        # map.connect('contact-us', '/contact-us',
+        #     controller='ckanext.yycdatacollective.controller:ContactUsController', 
+        #     action='index')
+        map.connect('contact-us', '/dataset/{id}/contact-us',
+            controller='ckanext.yycdatacollective.controller:ContactUsController', 
             action='index')
         return map
 
