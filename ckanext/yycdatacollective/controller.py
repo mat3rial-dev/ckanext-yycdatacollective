@@ -62,7 +62,11 @@ class ContactUsController(BaseController):
                             sender_name="YYC Data Collective", \
                             sender_url=data.get('contact_us.name'), \
                             subject="YYC Download authorization", \
-                            body=dataset_url
+                            body="Hey there,\n\nYou requested access to a " \
+                            "restricted dataset hosted in the YYC Data " \
+                            "Collective website.\n\nYou can download the "\
+                            "dataset through the following link: \n\n" + \
+                            dataset_url + "\n\nYours,\n\nYYC Data Collective"
                             )
 
                     h.flash_success(_('Email sent'))
