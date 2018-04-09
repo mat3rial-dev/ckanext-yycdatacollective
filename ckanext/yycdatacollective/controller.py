@@ -16,13 +16,16 @@ class ContactUsController(BaseController):
         data = request.params or {}
         errors = {}
         error_summary = {}
-        # print "h: {0}".format(h)
-        # print "p: {0}".format(p)
-        # print "c: {0}".format(c)
-        # print "g: {0}".format(g)
-        # print "data: {0}".format(data)
-        # print "contact_us: {0}".format(config.get('contact_us.email'))
-        # print "emailto: {0}".format(config.get('email_to'))
+        print "h: {0}".format(h)
+        print "p: {0}".format(p)
+        print "c: {0}".format(c)
+        print "g: {0}".format(g)
+        print "data: {0}".format(data)
+        print "contact_us: {0}".format(config.get('contact_us.email'))
+        print "emailto: {0}".format(config.get('email_to'))
+
+        user_ip = c.author
+        # print 'c.author: {0}'.format(user_ip)
 
         if not data == {}:
             import ckan.lib.mailer
