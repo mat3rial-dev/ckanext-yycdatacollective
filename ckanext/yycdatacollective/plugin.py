@@ -9,6 +9,7 @@ from pylons import tmpl_context as c
 import ckan.lib.helpers as h
 import ast
 
+
 def dataset_data_retriever(context, dataset_data_dict):
     '''Retrieve author and mantainer name and email, as well as dataset URL.'''
 
@@ -52,6 +53,9 @@ class YycdatacollectivePlugin(plugins.SingletonPlugin):
 
     def before_map(self, map):
         map.connect('contact-us', '/contact-us',
+            controller='ckanext.yycdatacollective.controller:ContactUsController',
+            action='index')
+        map.connect('contact-us', '/dataset/{id}/us',
             controller='ckanext.yycdatacollective.controller:ContactUsController',
             action='index')
         return map
