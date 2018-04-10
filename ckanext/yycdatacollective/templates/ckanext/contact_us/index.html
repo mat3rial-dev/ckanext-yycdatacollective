@@ -4,7 +4,6 @@
   <li class="active"><a href="#">{{ _('Contact Us') }}</a></li>
 {% endblock %}
 
-
 {% block secondary_content %}
 <section class="module module-narrow module-shallow">
     <h2 class="module-heading"><i class="icon-medium icon-info-sign"></i></h2>
@@ -24,6 +23,8 @@
             {% set dataset_data_retriever = h.dataset_data_retriever(c, dict()) %}
             <p>You are making your request from the IP address {{ dataset_data_retriever['request_ip'] }}</p>
             <p>You are about to send an email to the dataset maintainer {{ dataset_data_retriever['pkg.maintainer'] }}</p>
+
+
 
         {% endblock %}
 
