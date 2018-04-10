@@ -56,12 +56,12 @@ class ContactUsController(BaseController):
                     emails = config.get('contact_us.email')
                     for v in emails.split(','):
                         # print "V: {0}".format(v)
-                        ckan.lib.mailer._mail_recipient( 
-                            'Admin', 
-                            v, 
-                            data.get('contact_us.name'), 
-                            data.get('contact_us.email'), 
-                            'Contact form', 
+                        ckan.lib.mailer._mail_recipient(
+                            'Admin',
+                            v,
+                            data.get('contact_us.name'),
+                            data.get('contact_us.email'),
+                            'Contact form',
                             data.get('contact_us.message'))
                     # public user email
                         ckan.lib.mailer._mail_recipient(
