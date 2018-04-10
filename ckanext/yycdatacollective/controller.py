@@ -6,6 +6,10 @@ from ckan.lib.base import BaseController, config
 import jinja2
 from ckan.common import _, c, g, request
 from validate_email import validate_email
+from ckan.logic import action
+import ckan.model as model
+
+c = base.c
 
 abort = base.abort
 render = base.render
@@ -24,8 +28,14 @@ class ContactUsController(BaseController):
         print "contact_us: {0}".format(config.get('contact_us.email'))
         print "emailto: {0}".format(config.get('email_to'))
 
-        user_ip = c.author
-        # print 'c.author: {0}'.format(user_ip)
+        user_ip = c.remote_addr
+        # dataset_author = c.author
+
+        r = request.environ
+
+        user_ip = r['REMOTE_ADDR']
+        dataset_id = r['wsgiorg.routing_args'][1]['id']
+        print "user_ip: {0}\ndataset_id: {1}".format(user_ip, dataset_id)
 
         if not data == {}:
             import ckan.lib.mailer
