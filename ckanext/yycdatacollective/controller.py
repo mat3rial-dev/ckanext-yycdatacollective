@@ -16,26 +16,26 @@ render = base.render
 
 class ContactUsController(BaseController):
     def index(self, context=None):
-        c = p.toolkit.c
+        # c = p.toolkit.c
         data = request.params or {}
         errors = {}
         error_summary = {}
-        print "h: {0}".format(h)
-        print "p: {0}".format(p)
-        print "c: {0}".format(c)
-        print "g: {0}".format(g)
-        print "data: {0}".format(data)
-        print "contact_us: {0}".format(config.get('contact_us.email'))
-        print "emailto: {0}".format(config.get('email_to'))
-
-        user_ip = c.remote_addr
-        # dataset_author = c.author
 
         r = request.environ
+        print "request: {0}".format(r)
 
         user_ip = r['REMOTE_ADDR']
         dataset_id = r['wsgiorg.routing_args'][1]['id']
-        print "user_ip: {0}\ndataset_id: {1}".format(user_ip, dataset_id)
+
+        # if you use get_action, the context object is automatically populated for you with the model and user keys (https://lists.okfn.org/pipermail/ckan-dev/2013-May/004878.html)
+        result = p.toolkit.get_action('package_show')({}, {'id': dataset_id})
+
+        resources = result['resources']
+        print "result: {0}".format(result)
+
+        resource_url = [r['url'] for r in resources]
+        resource_url_txt = '\n\n'.join(resource_url)
+        print resource_url_txt
 
         if not data == {}:
             import ckan.lib.mailer
@@ -52,13 +52,36 @@ class ContactUsController(BaseController):
 
             if errors == {}:
                 try:
+                    # fetch information from YYC admin email from config
                     emails = config.get('contact_us.email')
-#                    print 'emails: ' + emails
-                    for v in emails.split(','): ckan.lib.mailer._mail_recipient('Admin',v,data.get('contact_us.name'),data.get('contact_us.email'),'Contact form',data.get('contact_us.message'))
+                    for v in emails.split(','): 
+                        # print "V: {0}".format(v)
+                        ckan.lib.mailer._mail_recipient( \
+                            'Admin', \
+                            v, \
+                            data.get('contact_us.name'), \
+                            data.get('contact_us.email'), \
+                            'Contact form', \
+                            data.get('contact_us.message'))
+                    # public user email
+                        ckan.lib.mailer._mail_recipient(
+                            recipient_name=data.get('contact_us.name'),
+                            recipient_email=data.get('contact_us.email'),
+                            sender_name="YYC Data Collective",
+                            sender_url=data.get('contact_us.name'),
+                            subject="YYC Download authorization",
+                            body="Dear " + data.get('contact_us.name') + 
+                            ",\n\nYou requested access to a restricted dataset"
+                            " hosted in the YYC Data Collective website from "
+                            "the IP address " + user_ip + ".\n\nYou can "
+                            "download the resource(s) of that dataset through "
+                            "the following link(s): \n\n" +
+                            resource_url_txt + "\n\nYours,\n\nYYC Data "
+                            "Collective")
                     h.flash_success(_('Email sent'))
                     data = {}
                 except ckan.lib.mailer.MailerException:
                     raise
-        #error_summary = errors
+
         vars = {'data': data, 'errors': errors, 'error_summary': error_summary}
         return render('ckanext/contact_us/index.html', extra_vars=vars)
