@@ -22,7 +22,7 @@ class ContactUsController(BaseController):
         error_summary = {}
 
         r = request.environ
-        print "request: {0}".format(r)
+        # print "request: {0}".format(r)
 
         user_ip = r['REMOTE_ADDR']
         dataset_id = r['wsgiorg.routing_args'][1]['id']
@@ -31,11 +31,11 @@ class ContactUsController(BaseController):
         result = p.toolkit.get_action('package_show')({}, {'id': dataset_id})
 
         resources = result['resources']
-        print "result: {0}".format(result)
+        # print "result: {0}".format(result)
 
-        resource_url = [r['url'] for r in resources]
+        resource_url = [resource['url'] for resource in resources]
         resource_url_txt = '\n\n'.join(resource_url)
-        print resource_url_txt
+        # print resource_url_txt
 
         if not data == {}:
             import ckan.lib.mailer
@@ -54,14 +54,14 @@ class ContactUsController(BaseController):
                 try:
                     # fetch information from YYC admin email from config
                     emails = config.get('contact_us.email')
-                    for v in emails.split(','): 
+                    for v in emails.split(','):
                         # print "V: {0}".format(v)
-                        ckan.lib.mailer._mail_recipient( \
-                            'Admin', \
-                            v, \
-                            data.get('contact_us.name'), \
-                            data.get('contact_us.email'), \
-                            'Contact form', \
+                        ckan.lib.mailer._mail_recipient( 
+                            'Admin', 
+                            v, 
+                            data.get('contact_us.name'), 
+                            data.get('contact_us.email'), 
+                            'Contact form', 
                             data.get('contact_us.message'))
                     # public user email
                         ckan.lib.mailer._mail_recipient(
@@ -70,7 +70,7 @@ class ContactUsController(BaseController):
                             sender_name="YYC Data Collective",
                             sender_url=data.get('contact_us.name'),
                             subject="YYC Download authorization",
-                            body="Dear " + data.get('contact_us.name') + 
+                            body="Dear " + data.get('contact_us.name') +
                             ",\n\nYou requested access to a restricted dataset"
                             " hosted in the YYC Data Collective website from "
                             "the IP address " + user_ip + ".\n\nYou can "
