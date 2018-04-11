@@ -32,6 +32,7 @@
     {# FIXME why is this here? seems wrong #}
     <span class="insert-comment-thread">
  
+
     {% set url_action = 'resource_edit' if url_is_edit and can_edit else 'resource_read' %}
 
     {% set org = h.get_organization(pkg.organization.name) %}
@@ -41,6 +42,7 @@
     {% for orav in org_av %}
         {% do id.append(orav.id) %}
     {% endfor %}
+
 
 
     {% set contact_form_data = dict() %}
@@ -58,14 +60,9 @@
 
     {% else %}
 
-        {# set contact_url = h.url_for('contact-us', dataset_data_dict=contact_form_data) #}
-	<p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href="contact-us">contact the dataset owner.</a></p>
+    {% set contact_url = h.url_for(controller='package', action='read', id=pkg.name) + '/contact-us' %}
 
-<!-- <p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href="{{ contact_url }}">contact the dataset owner.</a></p> -->
-
-{#
-	{% snippet "package/snippets/test.html" %}
-#}
+	   <p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href={{ contact_url }}>contact YYC Data Collective.</a></p>
 
     {% endif %}
 
