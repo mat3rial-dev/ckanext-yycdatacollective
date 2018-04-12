@@ -1,0 +1,92 @@
+
+{% set intro = g.site_intro_text %}
+
+<div class="module-content box">
+  <header>
+    {% if intro %}
+      {{ h.render_markdown(intro) }}
+    {% else %}
+      <h1 class="page-heading">{{ _("Welcome to CKAN") }}</h1>
+      <p>
+        {% trans %}This is a nice introductory paragraph about CKAN or the site
+        in general. We don't have any copy to go here yet but soon we will
+        {% endtrans %}
+      </p>
+    {% endif %}
+  </header>
+
+<style>
+
+div.a  { position: relative;
+    top: 30px;
+    right: 290px;
+}
+
+div.b  { position: relative;
+    left: 5px;
+    bottom: 3px;
+}
+div.c  {
+    position: relative;
+    left: 280px;
+    bottom:33px;
+}
+
+div.d   { display: inline-block;
+    position:relative; 
+    
+   
+}
+
+
+.new{
+      
+   margin-left:0px;
+   margin-bottom: -200px;
+}
+
+.media-image-update-a{
+   margin-left:150px;
+   margin-top: 20px;
+}
+.media-image-update-aa{
+   margin-left:160px;
+   margin-top: 202px;
+}
+
+</style>
+
+
+  {% block home_image %}
+    <section class="featured media-overlay hidden-phone">
+    <h2 #class="media-heading"#>{#% block home_image_caption %}{{ _("YYC Data collective is a bottom up data sharing platform") }}{% endblock %#}</h2>
+      {% block home_image_content %}
+
+        <a class="new" href="/user/register">
+          <img src="{{ h.url_for_static('/base/images/ICON-01.png') }}" alt="Placeholder" width="120" height="141" />
+        </a>
+        <a class="media-image-update-aa" href="/dataset">
+          <img src="{{ h.url_for_static('/base/images/ICON-03.png') }}" alt="Placeholder" width="120" height="141" />
+        </a>
+
+        <a class="media-image-update-a" href="/dataset">
+          <img src="{{ h.url_for_static('/base/images/ICON-02.png') }}" alt="Placeholder" width="120" height="141" />
+        </a>       
+      {% endblock %}
+    </section>
+  {% endblock %}
+
+
+  <div class="d">
+  <h4><span style="position: relative;right: 130px"><a href ="../../../base/images/Step_by_Step_Register.pdf" target="_blank">Learn to register to access more data</span></a></h4>
+  </div>
+
+  <div class="d">
+  <h4><span style="position: relative;right: 50px"><a href ="../../../base/images/Step_by_Step_Download_Data.pdf" target="_blank">Learn to download data</span></a></h4>
+  </div>
+
+  <div class="d">
+  <h4><span style="position: relative;left: 70px"><a href ="../../../base/images/Step_by_Step_Upload_Data.pdf" target="_blank">Learn to upload data</span></a></h4>
+  </div>
+
+</div>
