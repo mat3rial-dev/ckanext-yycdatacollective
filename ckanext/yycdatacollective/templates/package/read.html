@@ -43,15 +43,6 @@
         {% do id.append(orav.id) %}
     {% endfor %}
 
-
-
-    {% set contact_form_data = dict() %}
-    {% do contact_form_data.update({'pkg.maintainer': pkg.maintainer}) %}
-    {% do contact_form_data.update({'pkg.maintainer_email': pkg.maintainer_email}) %}
-    {% do contact_form_data.update({'pkg.author': pkg.author}) %}
-    {% do contact_form_data.update({'pkg.author_email': pkg.author_email}) %}
-    {% do contact_form_data.update({'pkg.dataset_url': pkg.resources[0].url}) %}
-
     {% if org.id in id %}
     {# This user belongs to this organization, hence can preview. #}
         {% block package_resources %}
