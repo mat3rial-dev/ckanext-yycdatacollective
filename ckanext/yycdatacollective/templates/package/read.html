@@ -38,22 +38,33 @@
     {% set org = h.get_organization(pkg.organization.name) %}
     {% set org_av = h.organizations_available() %}
 
-    {% set id = [] %}
+    {% set user_org = [] %}
     {% for orav in org_av %}
-        {% do id.append(orav.id) %}
+        {% do user_org.append(orav.id) %}
     {% endfor %}
 
-    {% if org.id in id %}
-    {# This user belongs to this organization, hence can preview. #}
+
+    <!-- if the dataset belongs to open calgary, redirect -->
+    {% if org.name == "opencalgary" %}
+    <p class="empty">This dataset can be accesed at the original organization. Click on the source link below.</p>
+
+    {% else %}
+
+    <!-- if the user belongs to the dataset's organization, allow -->
+      {% if org.id in user_org %}
+
+        {# This user belongs to this organization, hence can preview. #}
         {% block package_resources %}
           {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
         {% endblock %}
 
-    {% else %}
+      <!-- if the user doesn't belong to the dataset's organization, restrict -->
+      {% else %}
 
-    {% set contact_url = h.url_for(controller='package', action='read', id=pkg.name) + '/contact-us' %}
+        {% set contact_url = h.url_for(controller='package', action='read', id=pkg.name) + '/contact-us' %}
+  	     <p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href={{ contact_url }}>contact YYC Data Collective.</a></p>
 
-	   <p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href={{ contact_url }}>contact YYC Data Collective.</a></p>
+      {% endif %}
 
     {% endif %}
 
