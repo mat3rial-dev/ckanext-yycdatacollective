@@ -1,0 +1,84 @@
+
+
+
+.homepage .stats h3 {
+    margin: 0 0 25px 0;
+}
+
+.homepage .stats ul li {
+  float: left;
+  width: 33%;
+  
+}
+
+.homepage .stats ul li a b {
+    display: block;
+    font-size: 55px;
+    line-height: 1.5;
+}
+
+.homepage .stats ul li a {
+    display: block;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+a {
+  color: #187794;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.span12 {
+    width: 940px;
+    text-align: center;
+}
+
+
+
+
+.box {
+     
+        border-color: #a6a6a6; 
+	box-shadow: 0px 0px 0px #333333;
+}
+
+body {
+  background: #ebebeb url("../../../base/images/background_repeat_a.png");
+}
+
+@media (min-width:768px) {
+  .hero {
+    background: url("../../../base/images/Banner_Final_Done.png");
+    background-repeat: no-repeat;
+    background-position: center;  
+  }
+}
+
+.module-content:last-child {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+     
+}
+
+.module-content > :last-child {
+  margin-bottom:0;
+}
+
+@media (min-width: 768px) {
+  .homepage [role=main] {
+    padding: 20px 0;
+  }
+  .homepage.layout-1 .row1 .col2 {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+  }
+  .homepage.layout-1 .row1 .col2 .module-search {
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+
