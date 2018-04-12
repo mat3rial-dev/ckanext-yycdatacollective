@@ -1,0 +1,77 @@
+<div role="main" class="hero">
+  <div class="container">
+  </div>
+</div>
+<div role="main">
+  <div class="container">
+    <div class="row row1">
+      <div class="span12 col1">
+        {% block promoted %}
+          {% snippet 'home/snippets/promoted.html' %}
+        {% endblock %}
+        {% block stats %}
+          {% snippet 'home/snippets/stats.html' %}
+        {% endblock %}
+   
+    </div>
+    </div>
+      <br /> 
+    <div class="row row2">
+      <div class="span6 col1">
+        {% block featured_group %}
+          {% snippet 'home/snippets/featured_group.html' %}
+        {% endblock %}
+      </div>
+      <div class="span6 col2">
+        {% block featured_organization %}
+          {% snippet 'home/snippets/featured_organization.html' %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class= "container">
+
+<style>
+h2.new {
+    text-align:center;
+    margin-top: 25px;
+    margin-bottom: 25px; 
+}
+.media-image-new{
+    
+    margin-top: 200px;    
+    margin-left: 80px;
+    margin-bottom: 20px;
+}
+
+.media-image-newa{
+    margin-top: 200px;
+    margin-left: 80px;
+    margin-bottom: 20px;
+
+}
+
+.media-image-newaa{
+    margin-top: 20000px;
+    margin-left: 80px;
+    margin-bottom: 20px;  
+}
+
+</style>
+<h2 class= "new">Our Partners</h2>
+
+<a class="media-image-new" href="http://www.ucalgary.ca/">
+          <img src="{{ h.url_for_static('/base/images/uc_final.png') }}" alt="Placeholder" width="220" height="80" />
+        </a>
+
+
+<a class="media-image-newa" href="https://mellon.org/">
+          <img src="{{ h.url_for_static('/base/images/mellon_logo.png') }}" alt="Placeholder" width="220" height="80" />
+        </a>
+
+<a class="media-image-newaa" href="https://geog.ucalgary.ca/opendata/">
+          <img src="{{ h.url_for_static('/base/images/engaging_openData.png') }}" alt="Placeholder" width="220" height="80" />
+        </a>
+</div>
