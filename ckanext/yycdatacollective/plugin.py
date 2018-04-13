@@ -50,6 +50,7 @@ class YycdatacollectivePlugin(plugins.SingletonPlugin):
         # ckanext-yycdatacollective/ckanext/yycdatacollective/templates whenever it
         # renders a page.
         toolkit.add_template_directory(config, 'templates')
+        toolkit.add_public_directory(config, 'public')
 
     def before_map(self, map):
         # map.connect('contact-us', '/contact-us',
