@@ -21,8 +21,9 @@
         <h2>{{ _('Contact Us') }}</h2>
         {% block package_resources %}
             {% set dataset_data_retriever = h.dataset_data_retriever(c, dict()) %}
-            <p>You are making your request from the IP address {{ dataset_data_retriever['request_ip'] }}</p>
-            <p>You are about to send an email to the dataset maintainer {{ dataset_data_retriever['pkg.maintainer'] }}</p>
+            <p>You are making your request from the IP address {{ c.remote_addr }}</p>
+            <!-- <p>You are about to send an email to the dataset maintainer {{ dataset_data_retriever['pkg.maintainer'] }}</p> -->
+
 
 
 
