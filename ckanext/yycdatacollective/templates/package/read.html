@@ -62,7 +62,7 @@
       {% else %}
 
         {% set contact_url = h.url_for(controller='package', action='read', id=pkg.name) + '/contact-us' %}
-  	     <p class="empty">You are not part of this organization. If you want to preview this dataset you should <a href={{ contact_url }}>contact YYC Data Collective.</a></p>
+  	     <p class="empty">You are not part of this organization. If you want to access this dataset you should <a href={{ contact_url }}>contact YYC Data Collective.</a></p>
 
       {% endif %}
 
