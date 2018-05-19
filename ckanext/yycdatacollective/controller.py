@@ -22,9 +22,13 @@ class ContactUsController(BaseController):
         error_summary = {}
 
         r = request.environ
-        # print "request: {0}".format(r)
 
-        user_ip = r['REMOTE_ADDR']
+	# print "request: {0}".format(r)
+        # user_ip = r['REMOTE_ADDR']
+	user_ip = r['HTTP_X_FORWARDED_FOR']
+	# print 'user_ip: {0}'.format(user_ip)
+	# print "XXX: {0}".format(r['HTTP_X_FORWARDED_FOR'])
+
         dataset_id = r['wsgiorg.routing_args'][1]['id']
 
         # if you use get_action, the context object is automatically populated for you with the model and user keys (https://lists.okfn.org/pipermail/ckan-dev/2013-May/004878.html)
